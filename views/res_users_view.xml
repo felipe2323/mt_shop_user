@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="mt_res_user_form_inherit" model="ir.ui.view">
+            <field name="name">mt.res.users.form</field>
+            <field name="model">res.users</field>
+            <field name="inherit_id" ref="base.view_users_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[hasclass('oe_title')]" position="after">
+                    <group>
+                        <field name="has_shop" widget="boolean_toggle"/>
+                    </group>
+                    <group name="shop_info" string="Shop Info"
+                           attrs="{'invisible': [('has_shop', '!=', True)]}">
+                        <field name="shop_name"></field>
+                        <field name="shop_description"></field>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+
+
+        <record id="mt_custom_shops_view_tree" model="ir.ui.view">
+            <field name="name">mt_custom_shops_view_tree</field>
+            <field name="model">res.users</field>
+            <field name="arch" type="xml">
+                <tree string="Custom Shops">
+                    <field name="shop_name"/>
+                    <field name="shop_description"/>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+    </data>
+</odoo>

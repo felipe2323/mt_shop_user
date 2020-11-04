@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="custom_vendor_inherit_product_description_template" inherit_id="website_sale.product">
+          <xpath expr='//div[@id="product_details"]' position="inside">
+              <p class="text-muted" t-if="product.create_uid.has_shop">
+                  Sale by:
+                  <h1><span t-esc="product.create_uid.shop_name"></span></h1><br />
+                  <span t-esc="product.create_uid.shop_description"/><br />
+              </p>
+          </xpath>
+    </template>
+
+
+    <template id="custom_div_login_inherit" inherit_id="auth_signup.fields">
+        <xpath expr="//div[hasclass('field-confirm_password')]" position="after">
+            <div class="js_custom_shop">
+                <div class="form-group field-has_shop">
+                    <label for="login">do you want to custom shop?</label>
+                    <input type="checkbox" name="has_shop" id="has_shop" class="form-control form-control-sm" autofocus="autofocus"
+                        autocapitalize="off" t-att-readonly="'readonly' if only_passwords else None"/>
+                </div>
+                <div class="form-group field-shop_name" style="display: none;">
+                    <label for="login">Shop</label>
+                    <input type="text" name="shop_name" id="shop_name" class="form-control form-control-sm" autofocus="autofocus"
+                        autocapitalize="off" t-att-readonly="'readonly' if only_passwords else None"/>
+                </div>
+                <div class="form-group field-shop_description" style="display: none;">
+                    <label for="login">Shop description</label>
+                    <input type="text" name="shop_description" id="shop_description" class="form-control form-control-sm" autofocus="autofocus"
+                        autocapitalize="off"  t-att-readonly="'readonly' if only_passwords else None"/>
+                </div>
+            </div>
+        </xpath>
+    </template>
+</odoo>

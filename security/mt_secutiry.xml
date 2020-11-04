@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <!-- Groups Vendors -->
+        <record id="group_sale_custom_vendors" model="res.groups">
+            <field name="name">Mt Shop Vendors</field>
+            <field name="implied_ids" eval="[(4, ref('sales_team.group_sale_salesman')),
+            (4,ref('website.group_website_publisher'))]"/>
+        </record>
+
+
+        <!-- Multi - Salesmen sales order assignation rules -->
+        <record id="shop_user_pt_personal_rule" model="ir.rule">
+            <field name="name">Personal Product Template</field>
+            <field ref="product.model_product_template" name="model_id"/>
+            <field name="perm_read" eval="False"/>
+            <field name="domain_force">['|',('create_uid','=',user.id),('create_uid','=',False)]</field>
+            <field name="groups" eval="[(4, ref('mt_shop_user.group_sale_custom_vendors'))]"/>
+        </record>
+
+        <record id="shop_user_pp_personal_rule" model="ir.rule">
+            <field name="name">Personal Products</field>
+            <field ref="product.model_product_product" name="model_id"/>
+            <field name="perm_read" eval="False"/>
+            <field name="domain_force">['|',('create_uid','=',user.id),('create_uid','=',False)]</field>
+            <field name="groups" eval="[(4, ref('mt_shop_user.group_sale_custom_vendors'))]"/>
+        </record>
+
+
+    </data>
+</odoo>
